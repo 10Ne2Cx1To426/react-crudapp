@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 import reducer from "./reducers";
 import EventsIndex from "./components/events_index";
@@ -17,15 +18,17 @@ const enhancer =
 const store = createStore(reducer, enhancer);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={EventsIndex} />
-        <Route exact path="/events" component={EventsIndex} />
-        <Route path="/events/new" component={EventsNew} />
-        <Route path="/events/:id" component={EventsShow} />
-      </Switch>
-    </BrowserRouter>
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={EventsIndex} />
+          <Route exact path="/events" component={EventsIndex} />
+          <Route path="/events/new" component={EventsNew} />
+          <Route path="/events/:id" component={EventsShow} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById("root")
 );
